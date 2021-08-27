@@ -1,0 +1,33 @@
+body {
+  background: #ccc;
+  margin: 0 auto;
+  width: 375px;
+  height: 812px;
+}
+
+canvas {
+  background: #181820;
+  margin: 0 auto;
+  width: 375px;
+  height: 812px;
+}
+
+#canvas-wrap {
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 1.5em;
+  font-family: Verdana;
+  transition: all 0.7s ease-in;
+  color: white;
+}
+
+.score.highlight {
+  font-size: 2em;
+  color: green;
+  transition: none;
+}
