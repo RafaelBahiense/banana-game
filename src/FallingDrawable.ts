@@ -1,15 +1,18 @@
 import DrawableImage from "./DrawableImage";
+import Game from "./Game";
 import { randomIntFromInterval } from "./helpers";
 
 export default abstract class FallingDrawable extends DrawableImage {
   speed: number;
   active: boolean;
+  radius: number;
 
   constructor(
     context: CanvasRenderingContext2D,
     sprite: string,
     sizeX: number,
-    sizeY: number
+    sizeY: number,
+    radius: number
   ) {
     const fruitIndex = randomIntFromInterval(0, 4);
     super(
@@ -22,18 +25,18 @@ export default abstract class FallingDrawable extends DrawableImage {
     );
     this.speed = 5;
     this.active = true;
+    this.radius = radius;
   }
 
   private move(speed: number): void {
     this.positionY += speed;
   }
 
-  updateState(floorLevel: number) {
+  updateState(floorLevel: number, game: Game) {
     this.move(1);
-    this.cheackCollisonFloor(floorLevel);
+    this.cheackCollisonFloor(floorLevel, game);
+    game.player.checkCollision(this);
   }
 
-  private cheackCollisonFloor(floorLevel: number) {
-    if (this.positionY > floorLevel + this.sizeY) this.active = false;
-  }
+  abstract cheackCollisonFloor(floorLevel: number, game: Game): void;
 }

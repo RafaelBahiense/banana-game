@@ -1,4 +1,5 @@
 import DrawableImage from "./DrawableImage";
+import FallingDrawable from "./FallingDrawable";
 
 export default class Player extends DrawableImage {
   floorLevel: number;
@@ -16,7 +17,6 @@ export default class Player extends DrawableImage {
   }
 
   move(event: KeyboardEvent): void {
-    console.log(event.code);
     if (event.code === "KeyA" && this.positionX > 2.5) {
       //this.flip();
       this.positionX -= this.speed;
@@ -25,11 +25,18 @@ export default class Player extends DrawableImage {
       //this.flip();
       this.positionX += this.speed;
     }
-    console.log(this.positionX);
   }
 
   flip() {
     this.context.scale(-1, 1);
     this.draw();
+  }
+
+  checkCollision(fallingDrawable: FallingDrawable) {
+    const distance = Math.sqrt(
+      (this.positionX - fallingDrawable.positionX) ** 2 +
+        (this.positionY - fallingDrawable.positionY) ** 2
+    );
+    if (distance < 40 + fallingDrawable.radius) fallingDrawable.active = false;
   }
 }

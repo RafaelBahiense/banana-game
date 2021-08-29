@@ -14,6 +14,8 @@ export default class Game {
   floor: Rectangle;
   gameBar: Rectangle;
   hearts: Heart[];
+  HP: number;
+  points: number;
 
   constructor(
     screenWidth: number,
@@ -74,7 +76,7 @@ export default class Game {
 
   updateState() {
     this.fallingDrawable.forEach((fruit) =>
-      fruit.updateState(this.canvas.height - 160)
+      fruit.updateState(this.canvas.height - 160, this)
     );
   }
 
