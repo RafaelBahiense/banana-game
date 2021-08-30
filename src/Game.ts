@@ -15,7 +15,7 @@ export default class Game {
   gameBar: Rectangle;
   hearts: Heart[];
   HP: number;
-  points: number;
+  score: number;
 
   constructor(
     screenWidth: number,
@@ -43,6 +43,7 @@ export default class Game {
       new Heart(this.context, 91, 12),
       new Heart(this.context, 131, 12),
     ];
+    this.score = 0;
   }
 
   start() {

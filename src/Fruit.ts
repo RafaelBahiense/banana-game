@@ -16,6 +16,11 @@ export default class Fruit extends FallingDrawable {
     if (this.positionY > floorLevel + this.sizeY) this.active = false;
     game.HP -= 1;
   }
+
+  collison(game: Game) {
+    if (this.name !== "banana") game.score *= 2;
+    else game.score += this.points;
+  }
 }
 
 interface FruitProps {

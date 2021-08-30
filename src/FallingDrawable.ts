@@ -35,8 +35,9 @@ export default abstract class FallingDrawable extends DrawableImage {
   updateState(floorLevel: number, game: Game) {
     this.move(1);
     this.cheackCollisonFloor(floorLevel, game);
-    game.player.checkCollision(this);
+    game.player.checkCollision(game, this);
   }
 
   abstract cheackCollisonFloor(floorLevel: number, game: Game): void;
+  abstract collison(game: Game): void;
 }

@@ -1,5 +1,8 @@
+import Bomb from "./Bomb";
 import DrawableImage from "./DrawableImage";
 import FallingDrawable from "./FallingDrawable";
+import Fruit from "./Fruit";
+import Game from "./Game";
 
 export default class Player extends DrawableImage {
   floorLevel: number;
@@ -32,11 +35,14 @@ export default class Player extends DrawableImage {
     this.draw();
   }
 
-  checkCollision(fallingDrawable: FallingDrawable) {
+  checkCollision(game: Game, fallingDrawable: FallingDrawable) {
     const distance = Math.sqrt(
       (this.positionX - fallingDrawable.positionX) ** 2 +
         (this.positionY - fallingDrawable.positionY) ** 2
     );
-    if (distance < 40 + fallingDrawable.radius) fallingDrawable.active = false;
+    if (distance < 40 + fallingDrawable.radius) {
+      fallingDrawable.active = false;
+      fallingDrawable.collison(game);
+    }
   }
 }
