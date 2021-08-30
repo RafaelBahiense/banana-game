@@ -16,7 +16,7 @@ canvas {
   position: relative;
 }
 
-.score {
+#score {
   position: absolute;
   top: 16px;
   right: 50px;
@@ -24,10 +24,4 @@ canvas {
   font-family: Verdana;
   transition: all 0.7s ease-in;
   color: white;
-}
-
-.score.highlight {
-  font-size: 2em;
-  color: green;
-  transition: none;
 }

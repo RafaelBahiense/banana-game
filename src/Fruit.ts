@@ -18,8 +18,8 @@ export default class Fruit extends FallingDrawable {
   }
 
   collison(game: Game) {
-    if (this.name !== "banana") game.score *= 2;
-    else game.score += this.points;
+    if (this.name !== "banana") game.score += this.points;
+    else game.score *= 2;
   }
 }
 
