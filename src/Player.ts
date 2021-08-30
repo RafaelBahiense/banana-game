@@ -13,7 +13,7 @@ export default class Player extends DrawableImage {
     floorLevel: number,
     canvasWidth: number,
     canvasHeight: number,
-    sprite = "../public/sprites/alien.png"
+    sprite = "../public/sprites/alienRight.png"
   ) {
     super(context, sprite, canvasWidth / 2, canvasHeight - floorLevel, 64, 97);
     this.speed = 5;
@@ -21,18 +21,13 @@ export default class Player extends DrawableImage {
 
   move(event: KeyboardEvent): void {
     if (event.code === "KeyA" && this.positionX > 2.5) {
-      //this.flip();
+      this.sprite.src = "../public/sprites/alienLeft.png";
       this.positionX -= this.speed;
     }
     if (event.code === "KeyD" && this.positionX < 307.5) {
-      //this.flip();
+      this.sprite.src = "../public/sprites/alienRight.png";
       this.positionX += this.speed;
     }
-  }
-
-  flip() {
-    this.context.scale(-1, 1);
-    this.draw();
   }
 
   checkCollision(game: Game, fallingDrawable: FallingDrawable) {
