@@ -16,11 +16,13 @@ export default class Game {
   hearts: Heart[];
   HP: number;
   score: number;
+  scoreDisplay: HTMLElement;
 
   constructor(
     screenWidth: number,
     screenHeight: number,
-    canvas: HTMLCanvasElement
+    canvas: HTMLCanvasElement,
+    scoreDisplay: HTMLElement
   ) {
     this.canvas = canvas;
     this.canvas.width = screenWidth;
@@ -44,6 +46,7 @@ export default class Game {
       new Heart(this.context, 131, 12),
     ];
     this.score = 0;
+    this.scoreDisplay = scoreDisplay;
   }
 
   start() {
@@ -79,6 +82,7 @@ export default class Game {
     this.fallingDrawable.forEach((fruit) =>
       fruit.updateState(this.canvas.height - 160, this)
     );
+    this.scoreDisplay.innerHTML = `Score ${this.score || 0}`;
   }
 
   spawnFruit() {
@@ -106,9 +110,30 @@ export default class Game {
 
   endGame() {
     this.clearIntervals();
-    setTimeout(() => {
-      alert(`Fim do jogo! Você fez  pontos!`);
-    }, 2000);
+    const replay = confirm(
+      `Fim do jogo! Você fez ${this.score} pontos!\nDeseja jogar novamente?`
+    );
+    if (replay) {
+      this.clearProperties();
+      this.startIntervals();
+    }
+  }
+
+  clearProperties() {
+    this.player = new Player(
+      this.context,
+      130,
+      this.canvas.width,
+      this.canvas.height
+    );
+    this.fallingDrawable = [new Fruit(this.context)];
+    this.hearts = [
+      new Heart(this.context, 11, 12),
+      new Heart(this.context, 51, 12),
+      new Heart(this.context, 91, 12),
+      new Heart(this.context, 131, 12),
+    ];
+    this.score = 0;
   }
 
   clearScreen() {
