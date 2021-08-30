@@ -47,6 +47,8 @@ export default class Game {
     ];
     this.score = 0;
     this.scoreDisplay = scoreDisplay;
+    this.HP = 4;
+    console.log(this.HP);
   }
 
   start() {
@@ -82,7 +84,11 @@ export default class Game {
     this.fallingDrawable.forEach((fruit) =>
       fruit.updateState(this.canvas.height - 160, this)
     );
-    this.scoreDisplay.innerHTML = `Score ${this.score || 0}`;
+    this.scoreDisplay.innerHTML = `Score: ${this.score || 0}`;
+    if (this.HP <= 0) {
+      console.log("kke", this.HP);
+      this.endGame();
+    }
   }
 
   spawnFruit() {

@@ -13,8 +13,11 @@ export default class Fruit extends FallingDrawable {
   }
 
   cheackCollisonFloor(floorLevel: number, game: Game) {
-    if (this.positionY > floorLevel + this.sizeY) this.active = false;
-    game.HP -= 1;
+    if (this.positionY > floorLevel + this.sizeY) {
+      this.active = false;
+      game.HP -= 1;
+      game.hearts[game.HP].loseLife();
+    }
   }
 
   collison(game: Game) {
